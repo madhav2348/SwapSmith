@@ -10,7 +10,9 @@ import {
   Home,
   TrendingUp,
   Terminal as TerminalIcon,
+  MessageSquare,
 } from "lucide-react";
+import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 import WalletConnector from "./WalletConnector";
 
@@ -108,14 +110,26 @@ export default function Navbar() {
 
           <Link
             href="/prices"
-            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 sm:px-3 py-2 ${
+            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 sm:px-3 py-2 rounded-lg ${
               pathname === "/prices"
-                ? "text-white"
-                : "text-zinc-400 hover:text-white"
+                ? "text-white bg-blue-600"
+                : "text-zinc-400 hover:text-white hover:bg-zinc-800"
             }`}
           >
             <TrendingUp className="w-4 h-4" />
             <span className="hidden sm:inline">Live Prices</span>
+          </Link>
+
+          <Link
+            href="/discussions"
+            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 sm:px-3 py-2 rounded-lg ${
+              pathname === "/discussions"
+                ? "text-white bg-blue-600"
+                : "text-zinc-400 hover:text-white hover:bg-zinc-800"
+            }`}
+          >
+            <MessageSquare className="w-4 h-4" />
+            <span className="hidden sm:inline">Discussions</span>
           </Link>
 
           <Link
@@ -130,6 +144,19 @@ export default function Navbar() {
             <span className="hidden sm:inline">Terminal</span>
           </Link>
 
+
+          {/* About Nav Link */}
+          <Link
+            href="/about"
+            className={`flex items-center gap-1.5 text-sm font-semibold transition-colors px-2 sm:px-3 py-2 ${
+              pathname === "/about"
+                ? "text-white"
+                : "text-zinc-400 hover:text-white"
+            }`}
+          >
+            <span className="hidden sm:inline">About</span>
+          </Link>
+
           <div className="flex items-center gap-3">
             <div className="h-6 w-px bg-zinc-800 hidden sm:block" />
 
@@ -142,8 +169,14 @@ export default function Navbar() {
                 title="Profile Menu"
               >
                 {profileImageUrl ? (
-                  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-500">
-                    <img src={profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-blue-500">
+                    <Image
+                      src={profileImageUrl}
+                      alt="Profile"
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
                   </div>
                 ) : (
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
